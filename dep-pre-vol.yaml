@@ -38,9 +38,8 @@ spec:
           mountPath: /input
       volumes:
       - name: pv-vol
-          persistentVolumeClaim:
-            claimName: pvc-vol
-
+        persistentVolumeClaim:
+          claimName: pvc-vol
         # emptyDir: {}
         # hostPath:
         #   path: /var/data          

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-vol
+  labels:
+    app: busybox-vol
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-vol
+  template:
+    metadata:
+      labels:
+        app: busybox-vol
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ['sh', '-c', 'while true; do echo "$(date +%T)">> /output/timefile; sleep 5; done']
+        volumeMounts:
+        - name: vol
+          mountPath: /output        
+      - name: multitool
+        image: wbitt/network-multitool
+        env:
+        - name: HTTP_PORT
+          value: "8080"
+        - name: HTTPS_PORT
+          value: "11443"
+        ports:
+        - containerPort: 8080
+          name: http-port
+        - containerPort: 11443
+          name: https-port
+        volumeMounts:
+        - name: vol
+          mountPath: /input
+      volumes:
+      - name: vol
+        emptyDir: {}
+        # hostPath:
+        #   path: /var/data          

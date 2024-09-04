@@ -344,10 +344,31 @@ spec:
 
 Применяю:
 
+```
+kubectl apply -f pv-class-clame.yaml
+```
 
+```
+kubectl apply -f dep-stor-class-vol.yaml
+```
 
+![alt text](image-20.png)
+
+![alt text](image-21.png)
+
+![alt text](image-22.png)
 
 3. Продемонстрировать возможность чтения и записи файла изнутри пода. 
+
+![alt text](image-23.png)
+
+```
+kubectl exec -it dep-class-vol-77ffdb58c7-w4pdx  /bin/sh
+```
+
+![alt text](image-24.png)
+
+
 4. Предоставить манифесты, а также скриншоты или вывод необходимых команд.
 
 ------
